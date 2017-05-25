@@ -24,17 +24,36 @@
         <section>
             <div class="section container">
                 <div class="row">
+                    <h1 class="centered-hor section-head">
+                        Definition
+                    </h1>
+                </div>
+                <!--<div class="row">
                     <div class="c8 off-c2 columns centered-hor">
-                         <h4>According to the definition...</h4>
+                         <h5>According to the definition...</h5>
+                        </div>
+                </div>-->
+                <div class="row">
+                    <div class="c8 off-c2 columns centered-hor infotab">
                          <!-- Need to think of a better way to disply that, since this get's fucked on mobile view -->
-                            <pre><code class="smallmargin largecode">"... A proxy, in its most general form, is a class 
-functioning as an interface to something else. 
-The proxy could interface to anything:..." 
-                                            -- <a href="https://en.wikipedia.org/wiki/Proxy_pattern" target="_blank">Wikipedia</a>  -- 
-</code></pre>
-                        <h4>
+                            ... 
+                            <br/>
+                            A proxy, in its most general form, is a class 
+                            functioning as 
+                            an interface to something else.                         
+                            <br/>
+                            The proxy could interface to anything
+                            <br/>  
+                            ...   
+                            <br/>  
+                            <span style="font-size: 0.8em">-- <a href="https://en.wikipedia.org/wiki/Proxy_pattern" target="_blank">Wikipedia</a>  -- </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="c8 off-c2 columns centered-hor">
+                        <h5>
                             And so we povide the interface to fun!
-                        </h4>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -173,5 +192,15 @@ header{
     max-width: 100%;  
     height: auto; 
     width: 100%
+}
+
+.infotab{
+    padding: 1em 1em 1em 1em;
+    margin-bottom: 2em;
+    color: rgba(0,0,0,0.8);
+    font-family: 'Source Code Pro', monospace;
+    background: rgba(255,0,175,0.1);
+    border-radius: 1.5em;
+    font-size: 1.2em;
 }
 </style>
