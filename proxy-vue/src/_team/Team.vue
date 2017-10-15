@@ -22,82 +22,8 @@
 
 
         <!-- DEPARTMENTS -->
-         <section id="activities" >
-            <div class="container section">
-                <div class="row">
-                    <h1 class="centered-hor section-head">
-                        Departments
-                    </h1>
-                </div>
-
-                <!-- Determine which component to load based on the screen size -->
-                <span v-for="d_row in departments"> <!-- ITERATOR -->
-             
-                    <div class="row centered-hor">
-                        <div class="c4 columns centered-hor">
-
-                            <!-- First of the first row -->
-                            <div class="top-margin">        
-                                <!-- pictures need to be changed -->
-                                <img src="../assets/lnr-thumbs-up.svg" style="height: 80px;" class="value-img" />
-                                <h5>{{d_row.instances[0].title}}</h5>
-                                <h6>{{d_row.instances[0].text}}</h6>
-                                <a @click="selectDepartment(d_row, 0)">{{MORE_ANCHOR}}</a>
-                            </div>
-                            
-                            <!-- The shifted ones -->
-                            <span v-if="!isSelectorEmpty(d_row)">
-                                <div class="top-margin">        
-                                    <img src="../assets/lnr-thumbs-up.svg" style="height: 80px;" class="value-img" />
-                                    <h5>{{d_row.instances[1].title}}</h5>
-                                    <h6>{{d_row.instances[1].text}}</h6>
-                                    <a @click="selectDepartment(d_row, 1)">{{MORE_ANCHOR}}</a>
-                                </div>
-                                
-                                <div class="top-margin">        
-                                    <img src="../assets/lnr-thumbs-up.svg" style="height: 80px;" class="value-img" />
-                                    <h5>{{d_row.instances[2].title}}</h5>
-                                    <h6>{{d_row.instances[2].text}}</h6>
-                                    <a @click="selectDepartment(d_row, 2)">{{MORE_ANCHOR}}</a>
-                                </div>
-                            </span>
-                        </div>
-
-                        <!-- The selected one -->
-                        <div id="departmentDetailsPane"
-                                class="c8 columns centered-hor top-margin"  
-                                v-if="!isSelectorEmpty(d_row)">
-                            <h1><i class="fa fa-angle-left fa-1" 
-                                    @click="clearSelection()"></i> 
-                                    {{d_row.selected.title}}</h1>
-                        </div>
-
-                        <!-- The normal rest (none selected) -->
-                        <div class="c4 columns centered-hor" v-if="isSelectorEmpty(d_row)">
-                            <div class="top-margin">      
-                                <!-- pictures need to be changed -->
-                                <img src="../assets/lnr-thumbs-up.svg" style="height: 80px;" class="value-img" />
-                                <h5>{{d_row.instances[1].title}}</h5>
-                                <h6>{{d_row.instances[1].text}}</h6>
-                                <a @click="selectDepartment(d_row, 1)">{{MORE_ANCHOR}}</a>
-                            </div>
-                        </div>
-                        <div class="c4 columns centered-hor" v-if="isSelectorEmpty(d_row)">
-                            <div class="top-margin">      
-                                <!-- pictures need to be changed -->
-                                <img src="../assets/lnr-thumbs-up.svg" style="height: 80px;" class="value-img" />
-                                <h5>{{d_row.instances[2].title}}</h5>
-                                <h6>{{d_row.instances[2].text}}</h6>
-                                <a @click="selectDepartment(d_row, 2)">{{MORE_ANCHOR}}</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                </span> <!-- END OF ITERATOR -->
-            </div>
-        </section>
-
+        <dep-large v-if="isLargeEnough()"></dep-large>
+        
         <!-- FOOTER -->
         <app-footer></app-footer>
     </div>
@@ -111,51 +37,14 @@
 
     import Nav from '../_shared/Navigation.vue'
     import Footer from '../_shared/Footer.vue'
+    import DepLarge from './DepLarge.vue'
 
     export default {
         data() {
           return {
             title: "TEAM",
-            MORE_ANCHOR: "more...",
             anchors: [
                 
-            ],
-            departments: [
-                {
-                   
-                    instances:[
-                        {
-                            title: 'Administration',
-                            text:'Feed other students, share drinks and have fun'
-                        },
-                        {
-                            title: 'Internal & External',
-                            text:'Meet other students, share drinks and have fun'
-                        },
-                        {
-                            title: 'Internal & External',
-                            text:'Meet other students, share drinks and have fun'
-                        }
-                    ],
-                    selected: {},
-                },
-                {
-                    instances:[
-                        {
-                            title: 'Infrastructure',
-                            text:'Meet other students, share drinks and have fun'
-                        },
-                        {
-                            title: 'Internal & External',
-                            text:'Meet other students, share drinks and have fun'
-                        },
-                        {
-                            title: 'Teaching',
-                            text:'Meet other students, share drinks and have fun'
-                        }
-                    ],
-                    selected: {},
-                }
             ],
           }
         },
@@ -165,16 +54,10 @@
         //     }
         // },
         methods: {
-            selectDepartment: function(row, index) {
-                console.log('selecting');
-                for(let i in this.departments){this.departments[i].selected = {};}
-                row.selected = row.instances[index];
-            },
-            clearSelection: function() {
-                for(let i in this.departments){this.departments[i].selected = {};}
-            },
-            isSelectorEmpty: function(row){
-                return Object.keys(row.selected).length === 0 && row.selected.constructor === Object
+            isLargeEnough: function() {
+                let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                this.width = width;
+                return this.width > 560;
             }
         },
         created(){
@@ -199,6 +82,7 @@
         components: {
             'app-nav': Nav,
             'app-footer': Footer,
+            'dep-large': DepLarge,
         }
     }
 </script>
